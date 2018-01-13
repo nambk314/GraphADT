@@ -1,5 +1,6 @@
 package edu.union.adt.graph;
-
+import java.util.List;
+import java.util.ArrayList;
 /**
  * A graph that establishes connections (edges) between objects of
  * (parameterized) type V (vertices).  The edges are directed.  An
@@ -18,11 +19,13 @@ package edu.union.adt.graph;
  */
 public class Graph<V>
 {
+    private List<List<Object>> graph;
     /**
      * Create an empty graph.
      */
-    public Graph() 
+    public Graph()
     {
+        graph = new ArrayList<>();
     }
 
     /**
@@ -30,7 +33,7 @@ public class Graph<V>
      */
     public int numVertices()
     {
-        return 0;
+        return graph.size();
     }
 
     /**
@@ -38,7 +41,16 @@ public class Graph<V>
      */
     public int numEdges()
     {
-        return 0;
+        int count = 0;
+        if (numVertices() == 0) {
+            return 0;
+        } else {
+            for (List<Object> element : graph) {
+                count += element.size();
+            }
+            return count;
+        }
+
     }
 
     /**
