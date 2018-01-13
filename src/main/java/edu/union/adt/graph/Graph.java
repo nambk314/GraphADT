@@ -46,7 +46,7 @@ public class Graph<V>
             return 0;
         } else {
             for (List<V> element : graph) {
-                count += element.size();
+                count += element.size()-1;
             }
             return count;
         }
@@ -64,9 +64,11 @@ public class Graph<V>
     public int degree(V vertex)
     {
         return 0;
-        // try {
-        //     for ()
-        // }
+         // try {
+         //     for (List<V> element : graph) {
+         //        if (element.get(0))
+         //     }
+         // }
     }
 
     /**
@@ -80,6 +82,19 @@ public class Graph<V>
      */
     public void addEdge(V from, V to)
     {
+        if (!graph.contains(from)) {
+            addVertex(from);
+        }
+
+        if (!graph.contains(to)) {
+            addVertex(to);
+        }
+
+        for (List<V> vertices : graph) {
+            if (vertices.get(0).equals(from)) {
+                vertices.add(to);
+            }
+        }
     }
 
     /**
@@ -91,6 +106,16 @@ public class Graph<V>
      */
     public void addVertex(V vertex)
     {
+        int x = 0;
+        int size = graph.size();
+        while (x < size && !(graph.get(x).get(0)).equals(vertex)) {
+            x++;
+        }
+        if (x >= size) {
+            List<V> vertexList = new ArrayList<V>();
+            vertexList.add(vertex);
+            graph.add(vertexList);
+        }
     }
 
     /**
@@ -128,8 +153,18 @@ public class Graph<V>
      */
     public boolean contains(V vertex)
     {
-        return false;
-    }
+        int x = 0;
+        int size = graph.size();
+        while (x < size && !(graph.get(x).get(0)).equals(vertex)) {
+            x++;
+        }
+
+        if (x >= size) {
+            return false;
+        }
+        return true;
+
+     }
 
     /**
      * Tells whether an edge exists in the graph.
@@ -144,6 +179,19 @@ public class Graph<V>
      */
     public boolean hasEdge(V from, V to)
     {
+        if (!graph.contains(from) || !graph.contains(to)) {
+            return false;
+        }
+        for (List<V> vertices : graph) {
+            if (vertices.get(0).equals(from)) {
+                for (int x = 1; x < vertices.size(); x++) {
+                    if (vertices.get(x).equals(to)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
         return false;
     }
 

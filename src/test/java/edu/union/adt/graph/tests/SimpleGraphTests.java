@@ -46,9 +46,25 @@ public class SimpleGraphTests
         assertTrue("Adding a vertex causes the vertex to be in the graph",
                    g.contains("Foo"));
 
+        
+
         assertEquals("Adding a vertex increases vertex count",
                      1, g.numVertices());
 
+        assertEquals("Adding a vertex does not increase edge count",
+                     0, g.numEdges());
+
+        g.addVertex("Foo");
+
+        assertEquals("Adding the vertex that already exits in the graph won't increase vertex count", 
+                    1, g.numVertices());
+
+        g.addVertex("haha");
+
+        assertTrue("Adding a vertex causes the vertex to be in the graph",
+                   g.contains("haha"));
+        assertEquals("Adding the new vertex will increase the vertex count",
+                     2, g.numVertices());
         assertEquals("Adding a vertex does not increase edge count",
                      0, g.numEdges());
     }
