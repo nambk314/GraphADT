@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class Graph<V>
 {
-    private List<List<Object>> graph;
+    private List<List<V>> graph;
     /**
      * Create an empty graph.
      */
@@ -45,7 +45,7 @@ public class Graph<V>
         if (numVertices() == 0) {
             return 0;
         } else {
-            for (List<Object> element : graph) {
+            for (List<V> element : graph) {
                 count += element.size();
             }
             return count;
@@ -64,6 +64,9 @@ public class Graph<V>
     public int degree(V vertex)
     {
         return 0;
+        // try {
+        //     for ()
+        // }
     }
 
     /**
