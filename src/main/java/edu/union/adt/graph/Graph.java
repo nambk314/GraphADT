@@ -150,7 +150,16 @@ public class Graph<V>
      */
     public Iterable<V> adjacentTo(V from)
     {
-        return null;
+        int x = 0;
+        int size = graph.size();
+        ArrayList<V> temp = new ArrayList<>();
+        while (x < size && !(graph.get(x).get(0)).equals(vertex)) {
+            x++;
+        }
+        if (x < size) {
+            temp = graph.get(x).clone();
+        }
+        return temp;
     }
 
     /**
