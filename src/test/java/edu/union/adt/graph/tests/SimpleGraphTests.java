@@ -81,6 +81,9 @@ public class SimpleGraphTests
 
         g.addEdge("Foo", "Bar");
 
+        assertEquals("Adding the new vertex will increase the edge count",
+                     1, g.numEdges());
+
         assertTrue("Adding an edge causes it to exist in the graph",
                    g.hasEdge("Foo", "Bar"));
 
@@ -92,6 +95,23 @@ public class SimpleGraphTests
 
         assertEquals("Adding an edge does not increase the degree of the destination",
                      0, g.degree("Bar"));
+
+        g.addVertex("haha");
+        g.addEdge("Foo", "haha");
+        assertEquals("Adding the new vertex will increase the edge count",
+                     2, g.numEdges());
+
+        assertTrue("Adding an edge causes it to exist in the graph",
+                   g.hasEdge("Foo", "haha"));
+
+        g.addEdge("Bar","Foo");
+        assertEquals("Adding the new vertex will increase the edge count",
+                     3, g.numEdges());
+
+        assertTrue("Adding an edge causes it to exist in the graph",
+                   g.hasEdge("Bar", "Foo"));
+
+
     }
 
     @Test
@@ -106,6 +126,21 @@ public class SimpleGraphTests
 
         assertTrue("Adding an edge creates endpoints and connects them",
                    g.hasEdge("Foo", "Bar"));
+
+        g.addEdge("Foo", "haha");
+
+        assertTrue("Adding an edge creates the destinationt node if it didn't exist",
+                   g.contains("haha"));
+        assertTrue("Adding an edge creates endpoints and connects them",
+                   g.hasEdge("Foo", "haha"));
+
+        g.addEdge("hoho", "haha");
+
+        assertTrue("Adding an edge creates the destinationt node if it didn't exist",
+                   g.contains("hoho"));
+        assertTrue("Adding an edge creates endpoints and connects them",
+                   g.hasEdge("hoho", "haha"));
+
     }
 
     @Test

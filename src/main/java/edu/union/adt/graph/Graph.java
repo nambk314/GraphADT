@@ -61,14 +61,22 @@ public class Graph<V>
      * @param vertex the vertex whose degree we want.
      * @return the degree of vertex 'vertex'
      */
-    public int degree(V vertex)
+    public int degree(V vertex) throws RuntimeException 
     {
-        return 0;
-         // try {
-         //     for (List<V> element : graph) {
-         //        if (element.get(0))
-         //     }
-         // }
+         
+       int x = 0;
+       int size = graph.size();
+       int count = 0;
+       while (x < size && !(graph.get(x).get(0)).equals(vertex)) {
+            x ++;
+
+       }
+       if (x >= size) {
+            throw new RuntimeException("Vertex is not in the graph");
+       } else {
+            count = graph.get(x).size() - 1;
+       }
+       return count;
     }
 
     /**
@@ -179,20 +187,21 @@ public class Graph<V>
      */
     public boolean hasEdge(V from, V to)
     {
+        boolean edge = false;
         if (!graph.contains(from) || !graph.contains(to)) {
-            return false;
+            edge = false;
         }
         for (List<V> vertices : graph) {
             if (vertices.get(0).equals(from)) {
                 for (int x = 1; x < vertices.size(); x++) {
                     if (vertices.get(x).equals(to)) {
-                        return true;
+                        edge = true;
                     }
                 }
             }
         }
 
-        return false;
+        return edge;
     }
 
     /**
