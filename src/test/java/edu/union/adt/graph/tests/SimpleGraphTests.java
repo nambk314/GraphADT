@@ -148,11 +148,21 @@ public class SimpleGraphTests
     {
         g.addVertex("Foo");
         g.addVertex("Bar");
+        g.addVertex("haha");
+        g.addVertex("random");
 
         g.addEdge("Foo", "Bar");
-
         assertTrue("Adding an edge makes the destination adjacent to the source",
                    iteratorContains(g.adjacentTo("Foo"), "Bar"));
+
+        g.addEdge("Foo", "haha");
+        g.addEdge("random", "Foo");
+        assertTrue("Adding an edge makes the destination adjacent to the source",
+                   iteratorContains(g.adjacentTo("Foo"), "haha"));
+        assertFalse("Adding an edge does not make the source adjacent to the destination",
+                   iteratorContains(g.adjacentTo("Foo"), "random"));
+
+        
     }
 
     private boolean iteratorContains(Iterable<String> container, String x)
@@ -164,6 +174,19 @@ public class SimpleGraphTests
         }
 
         return false;
+    }
+
+    @Test
+    public void getVertices() {
+        g.addVertex("Foo");
+
+        assertTrue("Adding Foo vertex makes the iterator has Foo",
+                     iteratorContains(g.getVertices(), "Foo"));
+
+        g.addVertex("haha");
+        g.addVertex("random");
+        assertTrue("Adding Foo vertex makes the iterator has haha",
+             iteratorContains(g.getVertices(), "haha"));
     }
     
     @Test 
@@ -188,11 +211,15 @@ public class SimpleGraphTests
         g.addVertex("A");
         g.addVertex("B");
         g.addVertex("C");
+        g.addVertex("D");
+        g.addVertex("F");
+
         
         g.addEdge("A", "A");
         g.addEdge("A", "B");
         g.addEdge("C", "A");
         g.addEdge("C", "B");
+        g.addEdge("D", "F");
 
         String graphString = g.toString();
 
@@ -207,6 +234,7 @@ public class SimpleGraphTests
         verifyEdge(graphString, "A", "B");
         verifyEdge(graphString, "C", "A");
         verifyEdge(graphString, "C", "B");
+        verifyEdge(graphString, "D", "F");
     }
 
     private void verifyNoExtraCommas(String graphString)

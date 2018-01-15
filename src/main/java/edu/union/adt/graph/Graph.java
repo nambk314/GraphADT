@@ -120,7 +120,7 @@ public class Graph<V>
             x++;
         }
         if (x >= size) {
-            List<V> vertexList = new ArrayList<V>();
+            List<V> vertexList = new ArrayList<>();
             vertexList.add(vertex);
             graph.add(vertexList);
         }
@@ -132,7 +132,11 @@ public class Graph<V>
      */
     public Iterable<V> getVertices()
     {
-        return null;
+        List<V> items = new ArrayList<>();
+        for (List<V> element : graph) {
+            items.add(element.get(0));
+        }
+        return items;
     }
 
     /**
@@ -152,12 +156,15 @@ public class Graph<V>
     {
         int x = 0;
         int size = graph.size();
-        ArrayList<V> temp = new ArrayList<>();
-        while (x < size && !(graph.get(x).get(0)).equals(vertex)) {
+        List<V> temp = new ArrayList<>();
+        while (x < size && !(graph.get(x).get(0)).equals(from)) {
             x++;
         }
         if (x < size) {
-            temp = graph.get(x).clone();
+            List<V> items = graph.get(x);
+            for (int y = 1; y < items.size(); y++) {
+                temp.add(items.get(y));
+            }
         }
         return temp;
     }
@@ -245,6 +252,15 @@ public class Graph<V>
      */
     public String toString()
     {
-        return "";
+        String representation = "";
+        for (List<V> element : graph) {
+            representation += element.get(0) + ":";
+            for (int i = 1; i < element.size(); i++) {
+                representation += " " + element.get(i);
+            }
+            representation += "\n";
+        }
+        representation.substring(0, (representation.length()));
+        return representation;
     }
 }
