@@ -103,6 +103,9 @@ public class SimpleGraphTests
 
         assertTrue("Adding an edge causes it to exist in the graph",
                    g.hasEdge("Foo", "haha"));
+        g.addEdge("Foo", "haha");
+        assertEquals("Adding the already existed vertex will not increase the edge count",
+                     2, g.numEdges());
 
         g.addEdge("Bar","Foo");
         assertEquals("Adding the new vertex will increase the edge count",
@@ -110,6 +113,8 @@ public class SimpleGraphTests
 
         assertTrue("Adding an edge causes it to exist in the graph",
                    g.hasEdge("Bar", "Foo"));
+
+
 
 
     }

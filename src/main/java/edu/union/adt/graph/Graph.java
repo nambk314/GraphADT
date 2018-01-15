@@ -100,7 +100,15 @@ public class Graph<V>
 
         for (List<V> vertices : graph) {
             if (vertices.get(0).equals(from)) {
-                vertices.add(to);
+                int i = 1;
+                int size = vertices.size();
+                while (i < size && !(vertices.get(i).equals(to))) {
+                    i++;
+                }
+                if (i >= size) {
+                    vertices.add(to);
+                }
+                
             }
         }
     }
@@ -262,5 +270,18 @@ public class Graph<V>
         }
         representation.substring(0, (representation.length()));
         return representation;
+    }
+    @Override
+    public boolean equals(Object other) {
+        boolean answer = false;
+            if (!(other instanceof Graph)) {
+            answer = false;
+        }
+        Graph that = (Graph) other;
+
+        if ((this.graph.equals(that.graph))) {
+            answer = true;
+        }
+        return answer;
     }
 }
