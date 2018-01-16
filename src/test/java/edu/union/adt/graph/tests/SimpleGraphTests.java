@@ -12,17 +12,17 @@ import org.junit.After;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import edu.union.adt.graph.Graph;
+import edu.union.adt.graph.GraphImplementation;
 
 @RunWith(JUnit4.class)
 public class SimpleGraphTests
 {
-    private Graph<String> g;
+    private GraphImplementation<String> g;
     
     @Before
     public void setUp()
     {
-        g = new Graph<String>();
+        g = new GraphImplementation<String>();
     }
 
     @After

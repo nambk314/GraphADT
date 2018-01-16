@@ -14,16 +14,16 @@ import java.util.ArrayList;
  * parameterized with a vertex type V instead of assuming String
  * vertices.
  *
- * @author Aaron G. Cass
+ * @author Aaron G. Cass, Nam Bui
  * @version 1
  */
-public class Graph<V>
+public class GraphImplementation<V> implements Graph<V>
 {
     private List<List<V>> graph;
     /**
      * Create an empty graph.
      */
-    public Graph()
+    public GraphImplementation()
     {
         graph = new ArrayList<>();
     }
@@ -277,7 +277,7 @@ public class Graph<V>
             if (!(other instanceof Graph)) {
             answer = false;
         }
-        Graph that = (Graph) other;
+        GraphImplementation that = (GraphImplementation) other;
 
         if ((this.graph.equals(that.graph))) {
             answer = true;
