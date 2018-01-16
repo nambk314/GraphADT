@@ -12,12 +12,13 @@ import org.junit.After;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import edu.union.adt.graph.Graph;
 import edu.union.adt.graph.GraphImplementation;
 
 @RunWith(JUnit4.class)
 public class SimpleGraphTests
 {
-    private GraphImplementation<String> g;
+    private Graph<String> g;
     
     @Before
     public void setUp()
