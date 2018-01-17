@@ -1,6 +1,4 @@
 package edu.union.adt.graph;
-import java.util.List;
-import java.util.ArrayList;
 /**
  * A graph interface that establishes connections (edges) between objects of
  * (parameterized) type V (vertices).  The edges are directed.  An
