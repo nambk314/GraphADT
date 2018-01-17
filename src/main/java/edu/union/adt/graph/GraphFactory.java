@@ -9,9 +9,9 @@ import edu.union.adt.graph.GraphImplementation;
 *
 */
 
-class GraphFactory<V> {
+public class GraphFactory<V> {
 
-	public static Graph<V> createGraph() {
+	public Graph<V> createGraph() {
 		return new GraphImplementation<V>();
 	}
 }

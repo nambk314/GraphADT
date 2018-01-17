@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import edu.union.adt.graph.Graph;
+import edu.union.adt.graph.GraphFactory;
 import edu.union.adt.graph.GraphImplementation;
 
 @RunWith(JUnit4.class)
@@ -24,9 +25,9 @@ public class GraphTestsUsingEquals
     @Before
     public void setUp()
     {
-        g = new GraphImplementation<String>();
-        g2 = new GraphImplementation<String>();
-        objectGraph = new GraphImplementation<Object>();
+        g = new GraphFactory<String>().createGraph();
+        g2 = new GraphFactory<String>().createGraph();
+        objectGraph = new GraphFactory<Object>().createGraph();
     }
     
     @Test

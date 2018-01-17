@@ -24,7 +24,7 @@ public class SimpleGraphTests
     @Before
     public void setUp()
     {
-        g = new GraphFactory<String>();
+        g = new GraphFactory<String>().createGraph();
     }
 
     @After
