@@ -134,6 +134,9 @@ public interface Graph<V> {
      */
     public String toString();
 
+    /**
+    * Equal method to compare two Graph object.
+    **/
     public boolean equals(Object other);
 
 }
