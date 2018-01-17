@@ -14,6 +14,7 @@ import org.junit.runners.JUnit4;
 
 import edu.union.adt.graph.Graph;
 import edu.union.adt.graph.GraphImplementation;
+import edu.union.adt.graph.GraphFactory;
 
 @RunWith(JUnit4.class)
 public class SimpleGraphTests
@@ -23,7 +24,7 @@ public class SimpleGraphTests
     @Before
     public void setUp()
     {
-        g = new GraphImplementation<String>();
+        g = new GraphFactory<String>();
     }
 
     @After
