@@ -135,6 +135,70 @@ public class GraphTestBuin
 
     }
 
+    @Test
+    public void pathLength() {
+    	g.addVertex("Ant");
+
+    	assertEquals("Path length of a Vertex to itself is 0", g.pathLength("Ant", "Ant"), 0);
+
+    	g.addVertex("Buu");
+    	g.addVertex("Cow");
+    	g.addVertex("Dog");
+
+    	g.addEdge("Ant", "Buu");
+    	assertEquals("There is a path from Ant to Buu",
+    		g.pathLength("Ant", "Buu"));
+    	assertEquals("There is a path length 0 from Buu to Ant",
+    		g.pathLength("Buu", "Ant"), 0);
+    	g.addEdge("Buu", "Cow");
+
+    	assertEquals("Path length from Ant to Cow equal 2", g.pathLength("Ant", "Cow"), 2);
+    	g.addEdge("Ant", "Cow");
+
+    	g.addEdge("Cow", "Dog");
+    	assertEquals("Path length from Ant to Dog is 3", g.pathLength("Ant", "dog"), 3);
+
+    }
+
+    @Test
+    public void getPath(){
+    	g.addVertex("Ant");
+    	g.addVertex("Buu");
+    	g.addVertex("Cow");
+    	g.addVertex("Dog");
+
+    	g.addEdge("Ant", "Buu");
+    	assertTrue("The path from Ant to Buu contains Ant",
+    		iteratorContains(g.getPath("Ant", "Buu"), "Ant"));
+
+
+    	g.addEdge("Buu", "Cow");
+    	assertTrue("The path from Ant to Cow contains Buu",
+    		iteratorContains(g.getPath("Ant", "Cow"), "Buu"));
+
+
+    	g.addEdge("Ant", "Cow");
+    	assertFalse("The path from Ant to Cow no longer has Buu since there is a shorter path",
+    		iteratorContains(g.getPath("Ant", "Cow"), "Buu"));
+
+    	g.addEdge("Cow", "Dog");
+    	assertFalse("The path from Buu to Dog will not contain Ant",
+    		iteratorContains(g.getPath("Buu", "Dog"), "Ant"));
+
+
+    }
+
+    private boolean iteratorContains(Iterable<String> container, String x)
+    {
+        for (String s: container) {
+            if (s.equals(x)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
 }
 
