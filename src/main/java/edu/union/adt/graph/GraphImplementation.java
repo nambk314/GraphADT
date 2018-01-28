@@ -313,7 +313,20 @@ public class GraphImplementation<V> implements Graph<V>
      */
     public void removeVertex(V toRemove)
     {
-
+        for (int x = 0; x <graph.size(); x++) {
+            if (graph.get(x).get(0).equals(toRemove)) {
+                graph.remove(x);
+            }
+        }
+        for (List<V> element : graph) {
+            int y = 1;
+            while (y<element.size()){
+                 if (element.get(y).equals(toRemove)){
+                    element.remove(y);
+                 }
+                 y++;
+            }
+        }
     }
 
     /**

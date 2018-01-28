@@ -7,7 +7,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses
 ({
     SimpleGraphTests.class,
-    GraphTestsUsingEquals.class
+    GraphTestsUsingEquals.class,
     GraphTestBuin.class
 })
 public class GraphTestSuite

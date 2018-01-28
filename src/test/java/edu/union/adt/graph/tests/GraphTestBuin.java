@@ -60,6 +60,8 @@ public class GraphTestBuin
 
     	assertFalse("Removing vertex Foo from the graph so the graph no longer contains vertex Foo", 
     		g.contains("Foo"));
+        assertTrue("Removing vertex Cat that is not in the graph will not change the graph",
+            g.contains("haha"));
     	assertTrue("Removing only Foo so there is still vertex haha in the graph",
     		g.contains("haha"));
 
