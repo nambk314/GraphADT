@@ -293,7 +293,7 @@ public class GraphImplementation<V> implements Graph<V>
      */
     public boolean isEmpty()
     {
-        return false;
+        return (numVertices() == 0 && numEdges() == 0);
     }
 
     /**
