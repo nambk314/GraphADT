@@ -337,7 +337,16 @@ public class GraphImplementation<V> implements Graph<V>
      */
     public void removeEdge(V from, V to)
     {
-
+        for (List<V> element : graph) {
+            if (element.get(0).equals(from)){
+                int x = 1;
+                while (x < element.size()) {
+                    if (element.get(x).equals(to)){
+                        element.remove(x);
+                    }
+                }
+            }
+        }
     }
 
     /**
