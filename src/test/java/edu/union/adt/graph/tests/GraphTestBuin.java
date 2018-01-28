@@ -16,6 +16,11 @@ import edu.union.adt.graph.Graph;
 import edu.union.adt.graph.GraphImplementation;
 import edu.union.adt.graph.GraphFactory;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+
 @RunWith(JUnit4.class)
 public class GraphTestBuin
 {
@@ -175,6 +180,9 @@ public class GraphTestBuin
     	g.addEdge("Buu", "Cow");
     	assertTrue("The path from Ant to Cow contains Buu",
     		iteratorContains(g.getPath("Ant", "Cow"), "Buu"));
+        ArrayList<String> pathOne = new ArrayList<String>(Arrays.asList("Ant", "Buu", "Cow"));
+        assertEquals("The path from Ant to Cow will be ['Ant', 'Buu', 'Cow']",
+                    iteratorToList(g.getPath("Ant", "Cow")), pathOne);
 
 
     	g.addEdge("Ant", "Cow");
@@ -197,6 +205,15 @@ public class GraphTestBuin
         }
 
         return false;
+    }
+
+    private List<String> iteratorToList(Iterable<String> container) 
+    {
+        List<String> initial = new ArrayList<String>();
+        for (String s: container) {
+            initial.add(s);
+        }
+        return initial;
     }
 
 
