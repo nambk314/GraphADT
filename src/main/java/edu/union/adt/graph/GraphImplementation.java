@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.AbstractMap.SimpleEntry;
+import java.util.Stack;
 /**
  * A graph that establishes connections (edges) between objects of
  * (parameterized) type V (vertices).  The edges are directed.  An
@@ -476,8 +477,85 @@ public class GraphImplementation<V> implements Graph<V>
      * path from 'from' to 'to'.  The Iterable should include the
      * source and destination vertices.
      */
-    public Iterable<V> getPath(V from, V to)
+
+    public void getPathRecursion(V from, V to, LinkedList<V> holder)
     {
-        return null;
+        if (contains(from) && contains(to)) {
+            if (from.equals(to)) {
+                holder.push(from);
+
+            } else {
+                    List<V> visitedVertex = new ArrayList<V>();
+                    visitedVertex.add(from);
+                    Queue<SimpleEntry<V, V>> nextVertex = new LinkedList<SimpleEntry<V, V>>();
+                    SimpleEntry<V, V> fromPair = new SimpleEntry<V, V> (from, from);
+                    nextVertex.add(fromPair);
+
+                    while (nextVertex.size() != 0 && !nextVertex.peek().getKey().equals(to)) {
+                        SimpleEntry<V, V> current = nextVertex.poll();
+                        ArrayList<V> source = getVertexList(current.getKey());
+
+                        for (int x = 1; x<source.size(); x ++) {
+                            if (!visitedVertex.contains(source.get(x))) {
+                                V previous = current.getKey();
+                                SimpleEntry<V, V> nextSourcePair = new SimpleEntry<V, V> ((source.get(x)), previous);
+                                nextVertex.add(nextSourcePair);
+                                visitedVertex.add(source.get(x));
+                            }
+                        }
+                        
+                    }
+                    if (nextVertex.size() != 0) {
+                        V vertex = nextVertex.peek().getKey();
+                        holder.push(vertex);
+                        getPathRecursion(from, nextVertex.peek().getValue(), holder);
+
+                    }
+            }
+ 
+        }
+    }
+
+    //     public void getPathRecursion(V from, V to, Stack holder)
+    // {
+    //     if (contains(from) && contains(to)) {
+    //         if (from.equals(to)) {
+    //             holder.push(from);
+    //         } else {
+    //                 List<V> visitedVertex = new ArrayList<V>();
+    //                 visitedVertex.add(from);
+    //                 Queue<V> nextVertex = new LinkedList<V>();
+                    
+    //                 nextVertex.add(from);
+    //                 V current = null;
+    //                 while (nextVertex.size() != 0 && !nextVertex.peek().equals(to)) {
+    //                     current = nextVertex.poll();
+    //                     ArrayList<V> source = getVertexList(current);
+
+    //                     for (int x = 1; x<source.size(); x ++) {
+    //                         if (!visitedVertex.contains(source.get(x))) {
+    //                             nextVertex.add(source.get(x));
+    //                             visitedVertex.add(source.get(x));
+    //                         }
+    //                     }
+                        
+    //                 }
+    //                 if (nextVertex.size() != 0) {
+    //                     holder.push(current);
+    //                     getPathRecursion(from, current,holder);
+    //                 }
+    //         }
+ 
+    //     }
+    // }
+
+    public Iterable<V> getPath(V from, V to) {
+        LinkedList<V> holder = new LinkedList<V>();
+        if (hasPath(from, to)) {
+                
+                getPathRecursion(from, to, holder);
+        }
+        return holder;
+
     }
 }
