@@ -151,17 +151,28 @@ public class GraphTestBuin
     	g.addVertex("Dog");
 
     	g.addEdge("Ant", "Buu");
-    	assertEquals("There is a path from Ant to Buu",
-    		g.pathLength("Ant", "Buu"));
-    	assertEquals("There is a path length 0 from Buu to Ant",
-    		g.pathLength("Buu", "Ant"), 0);
+    	assertEquals("There is a path length equal 1 from Ant to Buu",
+    		g.pathLength("Ant", "Buu"), 1);
+    	assertEquals("There is not a path from Buu to Ant so the value is Integer.MAX_VALUE",
+    		g.pathLength("Buu", "Ant"), Integer.MAX_VALUE);
     	g.addEdge("Buu", "Cow");
 
     	assertEquals("Path length from Ant to Cow equal 2", g.pathLength("Ant", "Cow"), 2);
-    	g.addEdge("Ant", "Cow");
 
     	g.addEdge("Cow", "Dog");
-    	assertEquals("Path length from Ant to Dog is 3", g.pathLength("Ant", "dog"), 3);
+    	assertEquals("Path length from Ant to Dog is 3", g.pathLength("Ant", "Dog"), 3);
+
+        g.addEdge("Ant", "Cow");
+        assertEquals("Path length from Ant to Dog is now 2", g.pathLength("Ant", "Dog"), 2);
+
+        g.addVertex("Egg");
+
+        g.addEdge("Buu", "Egg");
+        g.addEdge("Dog", "Egg");
+
+        assertEquals("Path length from Ant to Dog is now 2", g.pathLength("Ant", "Egg"), 2);
+
+
 
     }
 

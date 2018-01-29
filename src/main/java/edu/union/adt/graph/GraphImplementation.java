@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Stack;
 /**
  * A graph that establishes connections (edges) between objects of
  * (parameterized) type V (vertices).  The edges are directed.  An
@@ -370,10 +372,10 @@ public class GraphImplementation<V> implements Graph<V>
     public boolean hasPath(V from, V to) {
         boolean result = false;
         if (contains(from) && contains(to)) {
-
             List<V> visitedVertex = new ArrayList<V>();
-            Queue<V> nextVertex = new LinkedList<V>();
             visitedVertex.add(from);
+            Queue<V> nextVertex = new LinkedList<V>();
+            
             nextVertex.add(from);
 
             while (nextVertex.size() != 0 && !nextVertex.peek().equals(to)) {
@@ -422,9 +424,52 @@ public class GraphImplementation<V> implements Graph<V>
      * @return the length of the shortest path from 'from' to 'to' in
      * the graph.  If there is no path, returns Integer.MAX_VALUE
      */
-    public int pathLength(V from, V to)
+    public int pathLengthRecursion(V from, V to, Stack<V> holder)
     {
-        return 0;
+        if (contains(from) && contains(to)) {
+            if (from.equals(to)) {
+                holder.push(from);
+                return holder;
+            } else {
+                    List<V> visitedVertex = new ArrayList<V>();
+                    visitedVertex.add(from);
+                    Queue<SimpleEntry<V, Integer>> nextVertex = new LinkedList<SimpleEntry<V, Integer>>();
+                    SimpleEntry<V, Integer> fromPair = new SimpleEntry<V, Integer> (from, shortestDistance);
+                    nextVertex.add(fromPair);
+
+                    while (nextVertex.size() != 0 && !nextVertex.peek().getKey().equals(to)) {
+                        SimpleEntry<V, Integer> current = nextVertex.poll();
+                        ArrayList<V> source = getVertexList(current.getKey());
+
+                        for (int x = 1; x<source.size(); x ++) {
+                            if (!visitedVertex.contains(source.get(x))) {
+                                int temp = current.getValue().intValue();
+                                temp++;
+                                Integer distance = new Integer(temp);
+                                SimpleEntry<V, Integer> nextSourcePair = new SimpleEntry<V, Integer> ((source.get(x)), distance);
+                                nextVertex.add(nextSourcePair);
+                                visitedVertex.add(source.get(x));
+                            }
+                        }
+                        
+                    }
+                    if (nextVertex.size() != 0) {
+                        V vertex = nextVertex.peek().getKey();
+                        holder.push(vertex);
+                        pathLengthRecursion(from, current, Stack<V> holder)
+
+                    }
+            }
+ 
+        }
+    }
+
+    public int pathLengthRecursion(V from, V to) {
+        if (hasPath(from, to)) {
+                Stack<V> holder = new Stack<V>();
+                pathLengthRecursion(from, to, holder);
+        }
+
     }
 
     /**
