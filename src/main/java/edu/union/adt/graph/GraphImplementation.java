@@ -1,6 +1,8 @@
 package edu.union.adt.graph;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Queue;
+import java.util.LinkedList;
 /**
  * A graph that establishes connections (edges) between objects of
  * (parameterized) type V (vertices).  The edges are directed.  An
@@ -193,8 +195,9 @@ public class GraphImplementation<V> implements Graph<V>
 
         if (x >= size) {
             return false;
+        } else {
+            return true;
         }
-        return true;
 
      }
 
@@ -364,9 +367,43 @@ public class GraphImplementation<V> implements Graph<V>
      * @param to the destination vertex
      * @return true iff there is a path from 'from' to 'to' in the graph.
      */
-    public boolean hasPath(V from, V to)
-    {
-        return false;
+    public boolean hasPath(V from, V to) {
+        boolean result = false;
+        if (contains(from) && contains(to)) {
+
+            List<V> visitedVertex = new ArrayList<V>();
+            Queue<V> nextVertex = new LinkedList<V>();
+            visitedVertex.add(from);
+            nextVertex.add(from);
+
+            while (nextVertex.size() != 0 && !nextVertex.peek().equals(to)) {
+                V current = nextVertex.poll();
+                ArrayList<V> source = getVertexList(current);
+
+                for (int x = 1; x<source.size(); x ++) {
+                    if (!visitedVertex.contains(source.get(x))) {
+                        nextVertex.add(source.get(x));
+                        visitedVertex.add(source.get(x));
+                    }
+                }
+                
+            }
+            if (nextVertex.size() != 0) {
+                result = true;
+            } 
+        }
+        return result;
+        
+    }
+
+    private ArrayList<V> getVertexList(V current) {
+        ArrayList<V> temp = new ArrayList<V>();
+        for (List<V> element : graph) {
+            if (element.get(0).equals(current)) {
+                temp.addAll(element);
+            }
+        }
+        return temp;
     }
 
     /**

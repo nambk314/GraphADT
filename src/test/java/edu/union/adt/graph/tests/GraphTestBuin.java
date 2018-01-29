@@ -110,19 +110,19 @@ public class GraphTestBuin
     public void hasPath() {
     	g.addVertex("Ant");
 
-    	assertFalse("A vertex does not have path to itself", 
+    	assertTrue("A vertex does have path to itself", 
     		g.hasPath("Ant", "Ant"));
 
     	g.addVertex("Buu");
     	g.addVertex("Cow");
     	g.addVertex("Dog");
  
-    	g.addEdge("Ant", "Boo");
+    	g.addEdge("Ant", "Buu");
 
-    	assertTrue("There is a path from Ant to Boo",
+    	assertTrue("There is a path from Ant to Buu",
     		g.hasPath("Ant", "Buu"));
-    	assertFalse("But there is no path from Boo to Ant",
-    		g.hasPath("Boo", "Ant"));
+    	assertFalse("But there is no path from Buu to Ant",
+    		g.hasPath("Buu", "Ant"));
 
     	g.addEdge("Buu", "Cow");
     	assertTrue("There is a path from Buu to Cow",
@@ -134,10 +134,8 @@ public class GraphTestBuin
     	assertFalse("There is no path from Cow to Dog",
     		g.hasPath("Cow", "Dog"));
 
-    	g.addEdge("Foo", "Foo");
-
-    	assertFalse("A vertex does not have path to itself even if it has edge to itself",
-    		g.hasPath("Foo", "Foo"));
+        assertFalse("There is no path from Cow to Dragon cause there is no vertex dragon",
+            g.hasPath("Cow", "Dragon"));
 
 
     }
