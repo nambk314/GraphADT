@@ -201,6 +201,9 @@ public class GraphTestBuin
     	g.addEdge("Ant", "Cow");
     	assertFalse("The path from Ant to Cow no longer has Buu since there is a shorter path",
     		iteratorContains(g.getPath("Ant", "Cow"), "Buu"));
+        ArrayList<String> pathTwo = new ArrayList<String>(Arrays.asList("Ant", "Cow"));
+        assertEquals("The path from Ant to Cow will be ['Ant', 'Cow']",
+                    iteratorToList(g.getPath("Ant", "Cow")), pathTwo);
 
     	g.addEdge("Cow", "Dog");
     	assertFalse("The path from Buu to Dog will not contain Ant",

@@ -16,6 +16,9 @@ import edu.union.adt.graph.Graph;
 import edu.union.adt.graph.GraphImplementation;
 import edu.union.adt.graph.GraphFactory;
 
+import java.util.List;
+import java.util.ArrayList;
+
 @RunWith(JUnit4.class)
 public class SimpleGraphTests
 {
@@ -169,6 +172,11 @@ public class SimpleGraphTests
         assertFalse("Adding an edge does not make the source adjacent to the destination",
                    iteratorContains(g.adjacentTo("Foo"), "random"));
 
+        List<String> test = new ArrayList<String>();
+        assertEquals("Null is not in the group so there will be an empty list",
+                   iteratorToList(g.adjacentTo(null)), test);
+
+
         
     }
 
@@ -181,6 +189,15 @@ public class SimpleGraphTests
         }
 
         return false;
+    }
+
+    private List<String> iteratorToList(Iterable<String> container) 
+    {
+        List<String> initial = new ArrayList<String>();
+        for (String s: container) {
+            initial.add(s);
+        }
+        return initial;
     }
 
     @Test
