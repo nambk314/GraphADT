@@ -1,5 +1,7 @@
 package edu.union.adt.graph.tests;
 
+import edu.union.adt.graph.tests.buin.GraphTestBuin;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -8,7 +10,7 @@ import org.junit.runners.Suite;
 ({
     SimpleGraphTests.class,
     GraphTestsUsingEquals.class,
-    GraphTestBuin.class
+    buin.GraphTestBuin.class
 })
 public class GraphTestSuite
 { // no implementation needed; above annotations do the work.

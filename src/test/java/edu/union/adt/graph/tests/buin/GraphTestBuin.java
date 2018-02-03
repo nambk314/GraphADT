@@ -1,4 +1,4 @@
-package edu.union.adt.graph.tests;
+package edu.union.adt.graph.tests.buin;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import edu.union.adt.graph.Graph;
-import edu.union.adt.graph.GraphImplementation;
 import edu.union.adt.graph.GraphFactory;
 
 import java.util.List;
